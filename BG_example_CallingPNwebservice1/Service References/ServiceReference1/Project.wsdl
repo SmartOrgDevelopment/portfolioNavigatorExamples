@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://smartorg.com/extAPI/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://smartorg.com/extAPI/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Portfolio Navigator v4.0 WebService API</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://smartorg.com/extAPI/">
+      <s:element name="TestAuth">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TestAuthResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TestAuthResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCategories">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="externalID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Categories" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateCategoriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateCategoriesResult" type="tns:ActionResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ResultCode" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CorrelationID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Warnings" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="TeamProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="externalID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="team64" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="TeamProjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TeamProjectResult" type="tns:ActionResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DestroyAllProjects">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DestroyAllProjectsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DestroyAllProjectsResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProjectsExtIDs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProjectsExtIDsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProjectsExtIDsResult" type="tns:ProjectDefs" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ProjectDefs">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Defs" type="tns:ArrayOfProjectDef" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfProjectDef">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ProjectDef" nillable="true" type="tns:ProjectDef" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProjectDef">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ID" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CorrelationID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Division" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CreateProject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="projectDescription" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="correlationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="division" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="templateName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CreateProjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CreateProjectResult" type="tns:ActionResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="ActionResult" nillable="true" type="tns:ActionResult" />
+      <s:element name="ArrayOfString" nillable="true" type="tns:ArrayOfString" />
+      <s:element name="ProjectDefs" nillable="true" type="tns:ProjectDefs" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="TestAuthSoapIn">
+    <wsdl:part name="parameters" element="tns:TestAuth" />
+  </wsdl:message>
+  <wsdl:message name="TestAuthSoapOut">
+    <wsdl:part name="parameters" element="tns:TestAuthResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCategoriesSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateCategories" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCategoriesSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="TeamProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:TeamProject" />
+  </wsdl:message>
+  <wsdl:message name="TeamProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:TeamProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="DestroyAllProjectsSoapIn">
+    <wsdl:part name="parameters" element="tns:DestroyAllProjects" />
+  </wsdl:message>
+  <wsdl:message name="DestroyAllProjectsSoapOut">
+    <wsdl:part name="parameters" element="tns:DestroyAllProjectsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsExtIDsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProjectsExtIDs" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsExtIDsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProjectsExtIDsResponse" />
+  </wsdl:message>
+  <wsdl:message name="CreateProjectSoapIn">
+    <wsdl:part name="parameters" element="tns:CreateProject" />
+  </wsdl:message>
+  <wsdl:message name="CreateProjectSoapOut">
+    <wsdl:part name="parameters" element="tns:CreateProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="TestAuthHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TestAuthHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCategoriesHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="externalID" type="s:string" />
+    <wsdl:part name="Categories" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCategoriesHttpGetOut">
+    <wsdl:part name="Body" element="tns:ActionResult" />
+  </wsdl:message>
+  <wsdl:message name="TeamProjectHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="externalID" type="s:string" />
+    <wsdl:part name="team64" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TeamProjectHttpGetOut">
+    <wsdl:part name="Body" element="tns:ActionResult" />
+  </wsdl:message>
+  <wsdl:message name="DestroyAllProjectsHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DestroyAllProjectsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsExtIDsHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsExtIDsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ProjectDefs" />
+  </wsdl:message>
+  <wsdl:message name="CreateProjectHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="projectName" type="s:string" />
+    <wsdl:part name="projectDescription" type="s:string" />
+    <wsdl:part name="correlationID" type="s:string" />
+    <wsdl:part name="division" type="s:string" />
+    <wsdl:part name="templateName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateProjectHttpGetOut">
+    <wsdl:part name="Body" element="tns:ActionResult" />
+  </wsdl:message>
+  <wsdl:message name="TestAuthHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TestAuthHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCategoriesHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="externalID" type="s:string" />
+    <wsdl:part name="Categories" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateCategoriesHttpPostOut">
+    <wsdl:part name="Body" element="tns:ActionResult" />
+  </wsdl:message>
+  <wsdl:message name="TeamProjectHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="externalID" type="s:string" />
+    <wsdl:part name="team64" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="TeamProjectHttpPostOut">
+    <wsdl:part name="Body" element="tns:ActionResult" />
+  </wsdl:message>
+  <wsdl:message name="DestroyAllProjectsHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DestroyAllProjectsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfString" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsExtIDsHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProjectsExtIDsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ProjectDefs" />
+  </wsdl:message>
+  <wsdl:message name="CreateProjectHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="projectName" type="s:string" />
+    <wsdl:part name="projectDescription" type="s:string" />
+    <wsdl:part name="correlationID" type="s:string" />
+    <wsdl:part name="division" type="s:string" />
+    <wsdl:part name="templateName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="CreateProjectHttpPostOut">
+    <wsdl:part name="Body" element="tns:ActionResult" />
+  </wsdl:message>
+  <wsdl:portType name="ProjectSoap">
+    <wsdl:operation name="TestAuth">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Test Authentication</wsdl:documentation>
+      <wsdl:input message="tns:TestAuthSoapIn" />
+      <wsdl:output message="tns:TestAuthSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategories">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update Categories for a task, Categories are in XML</wsdl:documentation>
+      <wsdl:input message="tns:UpdateCategoriesSoapIn" />
+      <wsdl:output message="tns:UpdateCategoriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TeamProject">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update Team for a task, team is XML</wsdl:documentation>
+      <wsdl:input message="tns:TeamProjectSoapIn" />
+      <wsdl:output message="tns:TeamProjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestroyAllProjects">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Clear out all Tasks, returns ext ID deleted</wsdl:documentation>
+      <wsdl:input message="tns:DestroyAllProjectsSoapIn" />
+      <wsdl:output message="tns:DestroyAllProjectsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsExtIDs">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List all Tasks</wsdl:documentation>
+      <wsdl:input message="tns:GetProjectsExtIDsSoapIn" />
+      <wsdl:output message="tns:GetProjectsExtIDsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateProject">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Create a new Task in Named Division's current dataset</wsdl:documentation>
+      <wsdl:input message="tns:CreateProjectSoapIn" />
+      <wsdl:output message="tns:CreateProjectSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ProjectHttpGet">
+    <wsdl:operation name="TestAuth">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Test Authentication</wsdl:documentation>
+      <wsdl:input message="tns:TestAuthHttpGetIn" />
+      <wsdl:output message="tns:TestAuthHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategories">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update Categories for a task, Categories are in XML</wsdl:documentation>
+      <wsdl:input message="tns:UpdateCategoriesHttpGetIn" />
+      <wsdl:output message="tns:UpdateCategoriesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TeamProject">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update Team for a task, team is XML</wsdl:documentation>
+      <wsdl:input message="tns:TeamProjectHttpGetIn" />
+      <wsdl:output message="tns:TeamProjectHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestroyAllProjects">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Clear out all Tasks, returns ext ID deleted</wsdl:documentation>
+      <wsdl:input message="tns:DestroyAllProjectsHttpGetIn" />
+      <wsdl:output message="tns:DestroyAllProjectsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsExtIDs">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List all Tasks</wsdl:documentation>
+      <wsdl:input message="tns:GetProjectsExtIDsHttpGetIn" />
+      <wsdl:output message="tns:GetProjectsExtIDsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateProject">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Create a new Task in Named Division's current dataset</wsdl:documentation>
+      <wsdl:input message="tns:CreateProjectHttpGetIn" />
+      <wsdl:output message="tns:CreateProjectHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ProjectHttpPost">
+    <wsdl:operation name="TestAuth">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Test Authentication</wsdl:documentation>
+      <wsdl:input message="tns:TestAuthHttpPostIn" />
+      <wsdl:output message="tns:TestAuthHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategories">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update Categories for a task, Categories are in XML</wsdl:documentation>
+      <wsdl:input message="tns:UpdateCategoriesHttpPostIn" />
+      <wsdl:output message="tns:UpdateCategoriesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="TeamProject">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Update Team for a task, team is XML</wsdl:documentation>
+      <wsdl:input message="tns:TeamProjectHttpPostIn" />
+      <wsdl:output message="tns:TeamProjectHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestroyAllProjects">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Clear out all Tasks, returns ext ID deleted</wsdl:documentation>
+      <wsdl:input message="tns:DestroyAllProjectsHttpPostIn" />
+      <wsdl:output message="tns:DestroyAllProjectsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsExtIDs">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">List all Tasks</wsdl:documentation>
+      <wsdl:input message="tns:GetProjectsExtIDsHttpPostIn" />
+      <wsdl:output message="tns:GetProjectsExtIDsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateProject">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Create a new Task in Named Division's current dataset</wsdl:documentation>
+      <wsdl:input message="tns:CreateProjectHttpPostIn" />
+      <wsdl:output message="tns:CreateProjectHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ProjectSoap" type="tns:ProjectSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TestAuth">
+      <soap:operation soapAction="http://smartorg.com/extAPI/TestAuth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategories">
+      <soap:operation soapAction="http://smartorg.com/extAPI/UpdateCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TeamProject">
+      <soap:operation soapAction="http://smartorg.com/extAPI/TeamProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestroyAllProjects">
+      <soap:operation soapAction="http://smartorg.com/extAPI/DestroyAllProjects" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsExtIDs">
+      <soap:operation soapAction="http://smartorg.com/extAPI/GetProjectsExtIDs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateProject">
+      <soap:operation soapAction="http://smartorg.com/extAPI/CreateProject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ProjectSoap12" type="tns:ProjectSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="TestAuth">
+      <soap12:operation soapAction="http://smartorg.com/extAPI/TestAuth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategories">
+      <soap12:operation soapAction="http://smartorg.com/extAPI/UpdateCategories" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TeamProject">
+      <soap12:operation soapAction="http://smartorg.com/extAPI/TeamProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestroyAllProjects">
+      <soap12:operation soapAction="http://smartorg.com/extAPI/DestroyAllProjects" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsExtIDs">
+      <soap12:operation soapAction="http://smartorg.com/extAPI/GetProjectsExtIDs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateProject">
+      <soap12:operation soapAction="http://smartorg.com/extAPI/CreateProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ProjectHttpGet" type="tns:ProjectHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="TestAuth">
+      <http:operation location="/TestAuth" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategories">
+      <http:operation location="/UpdateCategories" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TeamProject">
+      <http:operation location="/TeamProject" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestroyAllProjects">
+      <http:operation location="/DestroyAllProjects" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsExtIDs">
+      <http:operation location="/GetProjectsExtIDs" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateProject">
+      <http:operation location="/CreateProject" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ProjectHttpPost" type="tns:ProjectHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="TestAuth">
+      <http:operation location="/TestAuth" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCategories">
+      <http:operation location="/UpdateCategories" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TeamProject">
+      <http:operation location="/TeamProject" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestroyAllProjects">
+      <http:operation location="/DestroyAllProjects" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProjectsExtIDs">
+      <http:operation location="/GetProjectsExtIDs" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateProject">
+      <http:operation location="/CreateProject" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Project">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Portfolio Navigator v4.0 WebService API</wsdl:documentation>
+    <wsdl:port name="ProjectSoap" binding="tns:ProjectSoap">
+      <soap:address location="https://hosting.smartorg.com/bg3/asmx/interop/Project.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ProjectSoap12" binding="tns:ProjectSoap12">
+      <soap12:address location="https://hosting.smartorg.com/bg3/asmx/interop/Project.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ProjectHttpGet" binding="tns:ProjectHttpGet">
+      <http:address location="https://hosting.smartorg.com/bg3/asmx/interop/Project.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ProjectHttpPost" binding="tns:ProjectHttpPost">
+      <http:address location="https://hosting.smartorg.com/bg3/asmx/interop/Project.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
