@@ -32,12 +32,12 @@ namespace BG_example_CallingPNwebservice1
             ServiceReference1.ProjectSoapClient client = new BG_example_CallingPNwebservice1.ServiceReference1.ProjectSoapClient("ProjectSoap");
 
             //First clear out old projects entirely ( BEWARE !!! )
-            string[] response = client.DestroyAllProjects(usr, password);
+            /* string[] response = client.DestroyAllProjects(usr, password);
 
             foreach (var resp in response)
             {
                 Console.WriteLine(resp);
-            }
+            } */
 
 
             //Create New Task
