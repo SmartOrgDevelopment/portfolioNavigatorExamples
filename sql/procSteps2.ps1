@@ -56,7 +56,6 @@ function get-procSteps2 {
 		
 		write-log "-- sql to replace ProcessSteps content"
 		write-log "DELETE FROM processsteps" 
-		#write-log "SET IDENTITY_INSERT processsteps ON"
 		
 		$counter = 0
 		$steps = Import-csv $csvPath
@@ -65,14 +64,13 @@ function get-procSteps2 {
 			$tmpSQL = "INSERT INTO PROCESSSTEPS `
 			( checkbox,step,[file],phase,ProjectType,sequence) `
 			values ('{0}','{1}','{2}','{3}',{4},{5})" `
-			-f ,$_.checkbox,$_.step,$_.file,$_.phase,$_.ProjectType,$_.sequence
+			-f $_.checkbox,$_.step,$_.file,$_.phase,$_.ProjectType,$_.sequence
 
 			write-log $tmpSQL
 			$counter = $counter + 1
 		}
 		
 		set-info "Generated $counter INSERT statements to output SQL file --> $outputPath " 
-		#write-log "SET IDENTITY_INSERT processsteps OFF"
 		write-log "SELECT * FROM processsteps"
 		
 	}
