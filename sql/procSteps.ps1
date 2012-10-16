@@ -1,5 +1,5 @@
 #
-# Powershell script to extract process steps from a Portfolio Navigator DB
+# Powershell v3 only, script to extract process steps from a Portfolio Navigator DB
 # and to generate INSERT batch file
 # setup: configuration changes to Get-OutputPath, user/password/db/serverInstace
 # usage: 
