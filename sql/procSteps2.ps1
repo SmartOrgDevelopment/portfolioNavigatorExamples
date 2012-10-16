@@ -63,9 +63,9 @@ function get-procSteps2 {
 
 		$steps | foreach {
 			$tmpSQL = "INSERT INTO PROCESSSTEPS `
-			(ProcessStepsID, checkbox,step,[file],phase,ProjectType,sequence) `
-			values ({0},'{1}','{2}','{3}','{4}',{5},{6})" `
-			-f $_.ProcessStepsID ,$_.checkbox,$_.step,$_.file,$_.phase,$_.ProjectType,$_.sequence
+			( checkbox,step,[file],phase,ProjectType,sequence) `
+			values ('{0}','{1}','{2}','{3}',{4},{5})" `
+			-f ,$_.checkbox,$_.step,$_.file,$_.phase,$_.ProjectType,$_.sequence
 
 			write-log $tmpSQL
 			$counter = $counter + 1
