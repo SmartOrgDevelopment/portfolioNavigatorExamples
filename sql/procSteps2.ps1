@@ -56,7 +56,7 @@ function get-procSteps2 {
 		
 		write-log "-- sql to replace ProcessSteps content"
 		write-log "DELETE FROM processsteps" 
-		write-log "SET IDENTITY_INSERT processsteps ON"
+		#write-log "SET IDENTITY_INSERT processsteps ON"
 		
 		$counter = 0
 		$steps = Import-csv $csvPath
@@ -72,7 +72,7 @@ function get-procSteps2 {
 		}
 		
 		set-info "Generated $counter INSERT statements to output SQL file --> $outputPath " 
-		write-log "SET IDENTITY_INSERT processsteps OFF"
+		#write-log "SET IDENTITY_INSERT processsteps OFF"
 		write-log "SELECT * FROM processsteps"
 		
 	}
