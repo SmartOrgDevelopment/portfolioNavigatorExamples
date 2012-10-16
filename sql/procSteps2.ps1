@@ -33,10 +33,7 @@ function Get-AppDir
 	return "c:\dev\portfolioNavigatorExamples\sql"
 }
 
-
-
 function get-procSteps2 {
-
 	param($fileName='procSteps.csv')
 	
 	if( $fileName.indexOf(".csv") -eq -1)
@@ -73,11 +70,11 @@ function get-procSteps2 {
 			write-log $tmpSQL
 			$counter = $counter + 1
 		}
-
-		set-info "Generated $counter INSERT statements" 
+		
+		set-info "Generated $counter INSERT statements to output SQL file --> $outputPath " 
 		write-log "SET IDENTITY_INSERT processsteps OFF"
 		write-log "SELECT * FROM processsteps"
-
+		
 	}
 }
 
